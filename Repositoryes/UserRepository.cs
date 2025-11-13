@@ -14,17 +14,37 @@ namespace BookLibrary.Repository
             return db.Users.First(u => u.Id == id);
         }
 
+        //public User SelectByEmail(string email)
+        //{
+        //    return db.Users.First(u => u.Id == id);
+        //}
+
         public override List<User> SelectAll()
         {
             return db.Users.ToList();
         }
 
-        public override bool Add()
+        public override bool Add(string name, string email)
         {
-            return true;
+            try
+            {
+                // проверяем существование пользователя по EMAIL, если нет такого, создаём пользователя 
+                if ((db.Users.FirstOrDefault(u => u.Email == email)) is null)
+                {
+                    db.Users.Add(new User() { Name = name, Email = email });
+                    db.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
 
-        public override bool Remove()
+        public override bool RemoveById(int id)
         {
             return true;
         }

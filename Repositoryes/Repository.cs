@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookLibrary.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ namespace BookLibrary.Repository
         public BookLibraryContext db = new BookLibraryContext(true);
         public abstract T SelectById(int id);
         public abstract List<T> SelectAll();
-        public abstract bool Add();
-        public abstract bool Remove();
+        public abstract bool Add(string name, string email);
+        public abstract bool RemoveById(int id);
     }
 }
