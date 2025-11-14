@@ -1,5 +1,5 @@
 ﻿using BookLibrary.Configuration;
-using BookLibrary.Model;
+using BookLibrary.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -13,11 +13,15 @@ namespace BookLibrary
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Book> Books { get; set; }
+        // таблица с отношением пользователей и взятых ими книг
+        public DbSet<BookRegistration> BookRegistrations { get; set; }
 
         public BookLibraryContext(bool isNew = false){
             
             if (isNew)
+            {
                 Database.EnsureDeleted();
+            }
 
             Database.EnsureCreated();
         }
