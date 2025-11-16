@@ -19,14 +19,36 @@ namespace BookLibrary.Repositoryes
             return db.Users.ToList();
         }
 
-        public override bool Add()
+        public User? SelectByEmail(string email)
         {
-            return true;
+            return db.Users.FirstOrDefault(u => u.Email == email);
+        }
+        public bool Add(User user)
+        {
+            try
+            {
+                db.Users.Add(user);
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
-        public override bool Remove()
+        public bool Remove(int id)
         {
-            return true;
+            try
+            {
+                db.Users.Remove(SelectById(id));
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public bool UpdateNameById()

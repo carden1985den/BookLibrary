@@ -3,7 +3,7 @@ using BookLibrary.Repositoryes;
 
 namespace BookLibrary
 {
-    public class RentRepository : RepositoryConnection
+    public class RentRepository
     {
         UserRepository userRepository = new UserRepository();
         BookRepository bookRepository = new BookRepository();

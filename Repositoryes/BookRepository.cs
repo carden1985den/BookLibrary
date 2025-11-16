@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookLibrary.Repositoryes
 {
-    public class BookRepository : RepositoryConnection
+    public class BookRepository : Repository <Book>
     {
         public bool Add(Book book)
         {
