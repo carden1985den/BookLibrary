@@ -8,6 +8,6 @@ namespace BookLibrary.Repositoryes
 {
     public class RepositoryConnection
     {
-        protected BookLibraryContext db = new BookLibraryContext();
+        p
     }
 }

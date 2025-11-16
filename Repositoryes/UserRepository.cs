@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace BookLibrary.Repositoryes
 {
-    public class UserRepository : RepositoryConnection //, IRepository<User>
+    public class UserRepository : Repository<User>
     {
-        public User? SelectById(int id)
+        public override User? SelectById(int id)
         {
             return db.Users.FirstOrDefault(u => u.Id == id);
         }

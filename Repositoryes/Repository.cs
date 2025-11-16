@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace BookLibrary.Repositoryes
 {
-    interface IRepository<T>
+    abstract class Repository<T>
     {
-        public T? SelectById(int id);
-        public List<T> SelectAll();
-        public bool Add(T obj);
-        public bool Remove(int id);
+        protected BookLibraryContext db = new BookLibraryContext();
+        public abstract T? SelectById(int id);
+        public abstract List<T> SelectAll();
+        public abstract bool Add(T obj);
+        public abstract bool Remove(int id);
     }
 }
