@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookLibrary.Model
+namespace BookLibrary.Models
 {
     public class User
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
+        public string? Name { get; set; }
+        public string? Email { get; set; }
     }
 }

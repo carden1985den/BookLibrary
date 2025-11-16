@@ -1,4 +1,4 @@
-﻿using BookLibrary.Model;
+﻿using BookLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,20 +7,16 @@ using System.Threading.Tasks;
 
 namespace BookLibrary
 {
-    public class InitDatabaseEntity
+    public static class InitDatabaseEntity
     {
-        private bool needInit = false;
-        private BookLibraryContext db {  get; set; }
-        public InitDatabaseEntity(bool needInit, BookLibraryContext db)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="db">Database context</param>
+        /// <param name="init">True or False, init data or not</param>
+        public static void Now(BookLibraryContext db, bool init = false)
         {
-            if (this.needInit)
-                this.needInit = needInit;
-
-            this.db = db;
-        }
-        public void Now()
-        {
-            if (needInit)
+            if (init)
             {
                 // add users
                 db.Users.AddRange(
@@ -49,6 +45,7 @@ namespace BookLibrary
                     new Book() { Title = "Преступление и наказание", Author = "Фёдор Достоевский", Year = 1866 }
                     );
             }
+            db.SaveChanges();
         }
     }
 }

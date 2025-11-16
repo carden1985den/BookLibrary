@@ -1,13 +1,12 @@
-﻿using BookLibrary.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookLibrary.Repository
+namespace BookLibrary.Repositoryes
 {
-    public abstract class Repository <T>
+    interface IRepository<T>
     {
         public BookLibraryContext db = new BookLibraryContext(true);
         public abstract T SelectById(int id);
