@@ -1,6 +1,4 @@
-﻿using BookLibrary.Models;
-using BookLibrary.Repositoryes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,46 +8,60 @@ namespace BookLibrary
 {
     public class UserView
     {
-        UserRepository userRepository = new UserRepository();
-        public void GetUser()
+        public void Menu(UserRequestProcessing userRequestProcessing)
         {
-            Console.WriteLine("Список всех пользователей");
-            foreach (User user in userRepository.SelectAll())
+            while (true)
             {
-                Console.WriteLine($"{user.Name}");
+                //Console.Clear();
+
+                Console.WriteLine("1 - Показать всех пользователей");
+                Console.WriteLine("2 - Найти пользователя по ID");
+                Console.WriteLine("3 - Добавить пользователя");
+                Console.WriteLine("4 - Удалить пользователя");
+                Console.WriteLine("0 - Назад");
+
+                switch (Console.ReadLine())
+                {
+                    case "1":
+                        {
+                            userRequestProcessing.ShowAllUsers();
+                            break;
+                        }
+                    case "2":
+                        {
+                            Console.WriteLine("Введите Id пользователя");
+
+                            bool result = int.TryParse(Console.ReadLine(), out int id);
+
+                            if (result)
+                                userRequestProcessing.GetUserById(id);
+                            break;
+                        }
+                    case "3":
+                        {
+                            Console.WriteLine("Введите имя");
+                            var name = Console.ReadLine();
+
+                            Console.WriteLine("Введите email");
+                            var email = Console.ReadLine();
+
+                            userRequestProcessing.AddUser(name, email);
+                            break;
+                        }
+                    case "4":
+                        {
+                            Console.WriteLine("Введите Id пользователя");
+
+                            bool result = int.TryParse(Console.ReadLine(), out int id);
+
+                            if (result)
+                                userRequestProcessing.RemoveUser(id);
+                            break;
+                        }
+                    case "0":
+                        return;
+                }
             }
         }
-        public void GetUserById(int id)
-        {
-            Console.WriteLine("Поиск пользователя по ID");
-            User result = userRepository.SelectById(id);
-
-            if (result is not null)
-            {
-                Console.WriteLine(result.Name);
-            }
-            else
-            {
-                Console.WriteLine($"Пользователь с ID: {id} не найден");
-            }
-        }
-        public void AddUser(string name, string email)
-        {
-            var result = userRepository.Add(new User() { Name = name, Email = email });
-
-            if (result)
-            {
-                Console.WriteLine("Пользователь добавлен");
-            }
-            else
-            {
-                Console.WriteLine($"Ошибка добавления пользователя");
-            }
-        }
-        public void DeleteUser() { }
-        public void UpdateUserById() { }
-
-
-
     }
 }

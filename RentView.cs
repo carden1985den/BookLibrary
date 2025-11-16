@@ -6,14 +6,11 @@ using System.Threading.Tasks;
 
 namespace BookLibrary
 {
-    public class BookView
+    public class RentView
     {
-        public void Menu(BookRequestProcessing bookRequestProcessing)
+        public void Menu(RentRequestProcessing rentRequestProcessing)
         {
-            while (true)
-            {
-
-            }
+            rentRequestProcessing.RentBook
         }
     }
 }

@@ -7,19 +7,23 @@ using System.Threading.Tasks;
 
 namespace BookLibrary.Repositoryes
 {
-    public class UserRepository : Repository<User>
+    public class UserRepository : RepositoryConnection //, IRepository<User>
     {
-        public override User SelectById(int id)
+        public User? SelectById(int id)
         {
-            return base.db.Users.FirstOrDefault(u => u.Id == id);
+            return db.Users.FirstOrDefault(u => u.Id == id);
         }
 
-        public override List<User> SelectAll()
+        public List<User> SelectAll()
         {
             return db.Users.ToList();
         }
 
-        public override bool Add(User user)
+        public User? SelectByEmail(string email)
+        {
+            return db.Users.FirstOrDefault(u => u.Email == email);
+        }
+        public bool Add(User user)
         {
             try
             {
@@ -33,9 +37,18 @@ namespace BookLibrary.Repositoryes
             }
         }
 
-        public override bool Remove()
+        public bool Remove(int id)
         {
-            return true;
+            try
+            {
+                db.Users.Remove(SelectById(id));
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public bool UpdateNameById()

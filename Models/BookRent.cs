@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace BookLibrary.Models
 {
-    public class BookRegistration
+    public class BookRent
     {
         public int Id { get; set; }
-        public DateTime RegistrationDate { get; set; }
+        public DateTime RentDate { get; set; }
         public int UserId { get; set; }
         List <User> Users { get; set; }
         public int BookId { get; set; }

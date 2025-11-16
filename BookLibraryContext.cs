@@ -14,7 +14,7 @@ namespace BookLibrary
         public DbSet<User> Users { get; set; }
         public DbSet<Book> Books { get; set; }
         // таблица с отношением пользователей и взятых ими книг
-        public DbSet<BookRegistration> BookRegistrations { get; set; }
+        public DbSet<BookRent> BookRents { get; set; }
 
         public BookLibraryContext(bool isNew = false){
             

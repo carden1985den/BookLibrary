@@ -7,24 +7,24 @@ using System.Threading.Tasks;
 
 namespace BookLibrary.Repositoryes
 {
-    public class BookRepository : Repository<Book>
+    public class BookRepository : RepositoryConnection
     {
-        public override bool Add(Book book)
+        public bool Add(Book book)
         {
             throw new NotImplementedException();
         }
 
-        public override bool Remove()
+        public bool Remove(int id)
         {
             throw new NotImplementedException();
         }
 
-        public override List<Book> SelectAll()
+        public List<Book> SelectAll()
         {
             throw new NotImplementedException();
         }
 
-        public override Book SelectById(int id)
+        public Book SelectById(int id)
         {
             throw new NotImplementedException();
         }
