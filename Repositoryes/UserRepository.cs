@@ -14,7 +14,7 @@ namespace BookLibrary.Repositoryes
             return db.Users.FirstOrDefault(u => u.Id == id);
         }
 
-        public List<User> SelectAll()
+        public override List<User> SelectAll()
         {
             return db.Users.ToList();
         }
@@ -23,7 +23,7 @@ namespace BookLibrary.Repositoryes
         {
             return db.Users.FirstOrDefault(u => u.Email == email);
         }
-        public bool Add(User user)
+        public override bool Add(User user)
         {
             try
             {
@@ -37,11 +37,11 @@ namespace BookLibrary.Repositoryes
             }
         }
 
-        public bool Remove(int id)
+        public override bool Remove(User user)
         {
             try
             {
-                db.Users.Remove(SelectById(id));
+                db.Users.Remove(user);
                 db.SaveChanges();
                 return true;
             }
@@ -51,9 +51,22 @@ namespace BookLibrary.Repositoryes
             }
         }
 
-        public bool UpdateNameById()
+        /// <summary>
+        /// Обновление имени пользвоателя по ID
+        /// </summary>
+        /// <returns> true or false </returns>
+        public bool UpdateNameById(User user)
         {
-            return true;
+            try
+            {
+                db.Users.Update(user);
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

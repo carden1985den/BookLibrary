@@ -14,10 +14,10 @@ namespace BookLibrary
         public DbSet<User> Users { get; set; }
         public DbSet<Book> Books { get; set; }
         // таблица с отношением пользователей и взятых ими книг
-        public DbSet<BookRent> BookRents { get; set; }
+        public DbSet<RentedBook> BookRents { get; set; }
 
-        public BookLibraryContext(bool isNew = false){
-            
+        public BookLibraryContext(bool isNew = false)
+        {
             if (isNew)
             {
                 Database.EnsureDeleted();

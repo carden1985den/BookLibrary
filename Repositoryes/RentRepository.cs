@@ -1,26 +1,63 @@
 ﻿using BookLibrary.Models;
 using BookLibrary.Repositoryes;
+using Microsoft.IdentityModel.Tokens;
 
 namespace BookLibrary
 {
+    /// <summary>
+    /// Аренда книги, берем ИД пользователя и ИД книги в вносим в табилцу аренды
+    /// </summary>
     public class RentRepository
     {
-        UserRepository userRepository = new UserRepository();
-        BookRepository bookRepository = new BookRepository();
-        public bool RentBook(int userId, int bookId)
+        public bool AddRendedBook(User user, Book book)
         {
-            User user = userRepository.SelectById(userId);
-            Book book = bookRepository.SelectById(bookId);
-
-            if (user is not null && book is not null)
+            using (var db = new BookLibraryContext())
             {
-                BookRent bookRent = new BookRent() { UserId = user.Id, BookId = book.Id, RentDate = new DateTime() };
-                db.BookRents.Add(bookRent);
+                try
+                {
+                    RentedBook bookRent = new RentedBook() { UserId = user.Id, BookId = book.Id, RentDate = (new DateTime()).Date };
+                    db.BookRents.Add(bookRent);
+                    db.SaveChanges();
 
-                return true;
+                    return true;
+                }
+                catch
+                {
+                    return true;
+                }
             }
+        }
 
-            return false;
+        public IEnumerable<RentedBook> SelectRentedBookByUserId(int id)
+        {
+            using (var db = new BookLibraryContext())
+            {
+                return db.BookRents.Where(u => u.UserId == id).ToList();
+            }
+        }
+        public bool DeleteRentedBook(RentedBook rentedBooks)
+        {
+            using (var db = new BookLibraryContext())
+            {
+                try
+                {
+                    db.Remove(rentedBooks);
+                    db.SaveChanges();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
+
+        public RentedBook SelectRentByBookId(int bookId)
+        {
+            using (var db = new BookLibraryContext())
+            {
+                return db.BookRents.FirstOrDefault(b => b.BookId == bookId);
+            }
         }
     }
 }

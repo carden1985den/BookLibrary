@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BookLibrary.Models
 {
-    public class BookRent
+    public class RentedBook
     {
         public int Id { get; set; }
         public DateTime RentDate { get; set; }

@@ -7,26 +7,58 @@ using System.Threading.Tasks;
 
 namespace BookLibrary.Repositoryes
 {
-    public class BookRepository : Repository <Book>
+    public class BookRepository : Repository<Book>
     {
-        public bool Add(Book book)
+        public override bool Add(Book book)
         {
-            throw new NotImplementedException();
+            try
+            {
+                db.Books.Add(book);
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
-        public bool Remove(int id)
+        public override bool Remove(Book book)
         {
-            throw new NotImplementedException();
+            try
+            {
+                db.Books.Remove(book);
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
-        public List<Book> SelectAll()
+        public override List<Book> SelectAll()
         {
-            throw new NotImplementedException();
+            return db.Books.ToList();
         }
 
-        public Book SelectById(int id)
+        public override Book? SelectById(int id)
         {
-            throw new NotImplementedException();
+            return db.Books.FirstOrDefault(u => u.Id == id);
+        }
+
+        public bool Update(Book book)
+        {
+            try
+            {
+                db.Books.Update(book);
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

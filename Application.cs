@@ -1,10 +1,13 @@
 ﻿using BookLibrary;
 using BookLibrary.Repositoryes;
+using BookLibrary.View;
 
 class Application
 {
     static void Main()
     {
+        InitDatabaseEntity.Now();
+
         var userView = new UserView();
         var bookView = new BookView();
         var rentView = new RentView();
@@ -13,12 +16,11 @@ class Application
         var userRequestProcessing = new UserRequestProcessing();
         var bookRequestProcessing = new BookRequestProcessing();
         var rentRequestProcessing = new RentRequestProcessing();
-        //InitDatabaseEntity.Now(db, true);
+        
+        InitDatabaseEntity.Now(false);
 
         while (true)
         {
-            Console.Clear();
-
             Console.WriteLine("1 - Данные по пользователям");
             Console.WriteLine("2 - Данные по книгам");
             Console.WriteLine("3 - Аренда книги");
@@ -37,14 +39,27 @@ class Application
                         bookView.Menu(bookRequestProcessing);
                         break;
                     }
-                    case "3":
+                case "3":
                     {
-                        RentView.Menu(rentRequestProcessing);
+                        rentView.Menu(rentRequestProcessing);
+                        break;
+                    }
+                case "4":
+                    {
+                        requestView.Menu(); //(additionRequestProcessing);
                         break;
                     }
                 case "0":
                     return;
             }
         }
+    }
+
+    public static void ExitPreviousMenu()
+    {
+        Console.WriteLine();
+        Console.WriteLine("Нажмите любую клавишу для перехода в предыдущее меню...");
+        Console.ReadKey();
+        Console.Clear();
     }
 }
